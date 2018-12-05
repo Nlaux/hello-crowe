@@ -1,0 +1,157 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+
+namespace Hello_World
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, Crowe!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+
+            Console.WriteLine("Future proofing example, writing to a text file or Sql Database, press a key to continue...");
+            Console.ReadKey(true);
+
+            Console.WriteLine("Would you like to write to a text file or SQL Database? [F/D]");
+            string key = Console.ReadLine();
+
+            //Gather user input
+            Console.WriteLine("Enter your first name");
+            string fName = Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            Console.WriteLine("Enter your last name");
+            string lName = Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+
+            //Make decision based on user selection
+            bool confirmed = false;
+            while (!confirmed)
+            {
+               
+                if (key == "F")
+                {
+                    //get text file location from app.config file
+                    string filePath = ConfigurationManager.AppSettings.Get("filePath");
+
+                    //collect data
+                    List<Person> people = new List<Person>();
+                    List<string> lines = File.ReadAllLines(filePath).ToList();
+
+                   
+
+                    people.Add(new Person { FirstName = fName, LastName = lName });
+
+                    List<string> output = new List<string>();
+
+                    foreach (var person in people)
+                    {
+                        output.Add($"{ person.FirstName} { person.LastName }");
+                    }
+
+                    Console.WriteLine("writing to text file...");
+
+                    File.WriteAllLines(filePath, output);
+
+                    confirmed = true;
+                } else if (key == "D")
+                {
+                    //Read SQL connection string info from app.config
+                    string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
+
+                    //prep data to be inserted into database
+                    string insertStmt = "INSERT INTO dbo.People(FirstName, LastName)" + "VALUES(@FirstName, @LastName)";
+
+                    //create connection
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+
+                    //Insert into database
+                    using (SqlCommand cmd = new SqlCommand(insertStmt, conn))
+                    {
+                        // set up the command's parameters - to avoid SQl injection attacks
+                        cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = fName;
+                        cmd.Parameters.Add("@LastName", SqlDbType.VarChar, 50).Value = lName;
+
+                        // open connection, execute command, close connection
+                        conn.Open();
+                        int result = cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+
+                    Console.WriteLine("Info written to database, press any key to continue...");
+                    Console.ReadKey(true);
+                    confirmed = true;
+                }
+
+            }
+
+
+            
+
+
+
+
+
+
+
+
+            //string filePath = "./config.txt";
+            //List<Person> people = new List<Person>();
+            //List<string> lines = File.ReadAllLines(filePath).ToList();
+
+            ////needs error checking.
+            //foreach (var line in lines)
+            //{
+            //    string[] entries = line.Split(',');
+            //    Person newPerson = new Person();
+            //    newPerson.FirstName = entries[0];
+            //    newPerson.LastName = entries[1];
+            //    newPerson.Url = entries[2];
+
+            //    people.Add(newPerson);
+            //}
+
+
+
+            //Console.ReadLine();
+
+
+            //string filePath = "./config.txt";
+
+            //List<string> lines = File.ReadAllLines(filePath).ToList();
+
+            //foreach (string line in lines)
+            //{
+            //    Console.WriteLine(line);
+            //}
+
+            //lines.Add("Writing to the text file.");
+
+            //File.WriteAllLines(filePath, lines);
+
+            //Console.ReadLine();
+
+            // string sAttr;
+
+            // Read a particular key from the config file            
+            //sAttr = ConfigurationManager.AppSettings.Get("Key0");
+            //Console.WriteLine("The value of Key0: " + sAttr);
+
+            //// Read all the keys from the config file
+            //NameValueCollection sAll;
+            //sAll = ConfigurationManager.AppSettings;
+
+            //foreach (string s in sAll.AllKeys)
+            //    Console.WriteLine("Key: " + s + " Value: " + sAll.Get(s));
+            //Console.ReadLine();
+        }
+    }
+}

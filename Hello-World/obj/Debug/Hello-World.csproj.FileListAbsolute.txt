@@ -1,0 +1,14 @@
+C:\Users\V3067\Desktop\Projects\Hello-World\obj\Debug\Hello-World.csprojResolveAssemblyReference.cache
+C:\Users\V3067\Desktop\Projects\Hello-World\obj\Debug\Hello-World.csproj.CoreCompileInputs.cache
+C:\Users\V3067\Desktop\Projects\Hello-World\bin\Debug\Hello-World.exe.config
+C:\Users\V3067\Desktop\Projects\Hello-World\bin\Debug\Hello-World.exe
+C:\Users\V3067\Desktop\Projects\Hello-World\bin\Debug\Hello-World.pdb
+C:\Users\V3067\Desktop\Projects\Hello-World\obj\Debug\Hello-World.exe
+C:\Users\V3067\Desktop\Projects\Hello-World\obj\Debug\Hello-World.pdb
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\bin\Debug\Hello-World.exe.config
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\bin\Debug\Hello-World.exe
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\bin\Debug\Hello-World.pdb
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\obj\Debug\Hello-World.csprojAssemblyReference.cache
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\obj\Debug\Hello-World.csproj.CoreCompileInputs.cache
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\obj\Debug\Hello-World.exe
+C:\Users\Dr.X\Desktop\Hello-World\Hello-World\obj\Debug\Hello-World.pdb
